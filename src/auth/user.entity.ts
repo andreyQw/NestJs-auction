@@ -1,5 +1,6 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
-import * as bcrypt from 'bcrypt'; 
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, Index , OneToMany} from "typeorm";
+import * as bcrypt from 'bcrypt';
+import { Lot } from "../lots/lot.entity";
 
 @Entity()
 @Unique(['email', 'phone'])
@@ -7,6 +8,7 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Index()
   @Column({ unique: true })
   email: string;
 
@@ -20,13 +22,16 @@ export class User extends BaseEntity {
   lastName: string;
 
   @Column({ nullable: true })
-  birthday: string;
+  birthday: Date;
 
   @Column()
   password: string;
 
   @Column({ nullable: true })
   salt: string;
+
+  @OneToMany(type => Lot, lot => lot.user, { eager: true })
+  lots: Lot[];
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);

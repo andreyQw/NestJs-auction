@@ -13,7 +13,8 @@ import { JwtStrategy } from './jwt.strategy';
     JwtModule.register({
       secret: 'auctionSecret',
       signOptions: {
-        expiresIn: 3600,
+        // expiresIn: 3600, // A numeric value is interpreted as a seconds count. 3600 -> 1h
+        expiresIn: '12h'
       },
     }),
     TypeOrmModule.forFeature([UserRepository]),
