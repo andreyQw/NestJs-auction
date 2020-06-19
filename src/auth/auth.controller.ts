@@ -26,5 +26,7 @@ export class AuthController {
   @UseGuards(AuthGuard())
   test(@CurrentUser() user: User) {
     console.log(user);
+
+    return {user: user}
   }
 }
