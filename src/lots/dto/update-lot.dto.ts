@@ -1,31 +1,40 @@
-import {IsDate, IsNotEmpty, IsString, Min, MinDate} from "class-validator";
-import {LotStatus} from "../lot-status.enum";
+import { IsDate, IsNotEmpty, IsString, Min, MinDate, IsEnum, IsOptional, IsPositive } from "class-validator";
+import { Type } from "class-transformer"
+import { LotStatus } from "../lot-status.enum";
 
 export class UpdateLotDto {
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   title: string;
 
   @IsString()
+  @IsOptional()
   description: string;
 
-  status: LotStatus = LotStatus.PENDING;
+  @IsEnum(LotStatus)
+  @IsOptional()
+  status: LotStatus;
 
-  @IsNotEmpty()
-  @Min(0)
+  @IsPositive()
+  @IsOptional()
+  @Type(() => Number)
   currentPrice: number;
 
-  @IsNotEmpty()
+  @IsPositive()
+  @IsOptional()
+  @Type(() => Number)
   estimatedPrice: number;
 
-  @IsNotEmpty()
   @IsDate()
+  @IsOptional()
   @MinDate(new Date())
+  @Type(() => Date)
   lotStartTime: Date;
 
-  @IsNotEmpty()
   @IsDate()
+  @IsOptional()
   @MinDate(new Date())
+  @Type(() => Date)
   lotEndTime: Date;
 
   image: string;
