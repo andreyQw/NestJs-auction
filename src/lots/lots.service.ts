@@ -1,12 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import {InjectRepository} from "@nestjs/typeorm";
-import {LotRepository} from "./lot.repository";
+import { InjectRepository } from "@nestjs/typeorm";
+import { LotRepository } from "./lot.repository";
 import { CreateLotDto } from './dto/create-lot.dto';
 import { User } from 'src/auth/user.entity';
 import { GetLotsFilterDto } from './dto/get-lots-filter.dto';
 import { Lot } from './lot.entity';
-import { LotStatus } from './lot-status.enum';
-import {UpdateLotDto} from "./dto/update-lot.dto";
+import { UpdateLotDto } from "./dto/update-lot.dto";
 
 @Injectable()
 export class LotsService {
@@ -24,19 +23,6 @@ export class LotsService {
 
   async getLotById(id: number,): Promise<Lot> {
     const found = await this.lotRepository.findOne(id);
-
-    if (!found) {
-      throw new NotFoundException(`Lot with ID "${id}" not found`);
-    }
-
-    return found;
-  }
-
-  async getOwnLotById(
-    id: number,
-    user: User,
-  ): Promise<Lot> {
-    const found = await this.lotRepository.getOwnLot(id, user);
 
     if (!found) {
       throw new NotFoundException(`Lot with ID "${id}" not found`);

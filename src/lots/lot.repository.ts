@@ -4,8 +4,8 @@ import { CreateLotDto } from './dto/create-lot.dto';
 import { User } from 'src/auth/user.entity';
 import { LotStatus } from './lot-status.enum';
 import { GetLotsFilterDto } from './dto/get-lots-filter.dto';
-import { NotFoundException } from '@nestjs/common';
-import {UpdateLotDto} from "./dto/update-lot.dto";
+import { NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { UpdateLotDto } from "./dto/update-lot.dto";
 
 @EntityRepository(Lot)
 export class LotRepository extends Repository<Lot> {
@@ -18,8 +18,8 @@ export class LotRepository extends Repository<Lot> {
 
     const query = this.createQueryBuilder('lot');
 
-    if (user) {
-      query.where('lot.userId = :userId', { userId: user.id })
+    if (myLots === true) {
+      query.andWhere('lot.userId = :userId', { userId: user.id })
     }
 
     if (status) {
@@ -57,7 +57,11 @@ export class LotRepository extends Repository<Lot> {
     lot.image = 'string';
     lot.user = user;
 
-    await lot.save();
+    try {
+      await lot.save();
+    } catch (error) {
+      throw new InternalServerErrorException(`Failed to create a lot. Data: ${CreateLotDto}`, error.stack);
+    }
 
     return lot;
   }
@@ -67,7 +71,6 @@ export class LotRepository extends Repository<Lot> {
   ){
     const {title, status, currentPrice, estimatedPrice, lotStartTime, lotEndTime, description } = updateLotDto;
     const lot = await this.getOwnLot(id, user);
-    console.log('serv', lot);
 
     if (!lot) {
       throw new NotFoundException(`Lot with ID "${id}" not found`)
@@ -81,7 +84,11 @@ export class LotRepository extends Repository<Lot> {
     lot.lotEndTime = lotEndTime;
     lot.description = description;
 
-    await lot.save();
+    try {
+      await lot.save();
+    } catch (error) {
+      throw new InternalServerErrorException(`Failed to update a lot. Data: ${updateLotDto}`, error.stack);
+    }
 
     return lot;
   }

@@ -1,6 +1,7 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, Index} from "typeorm";
-import {LotStatus} from "./lot-status.enum";
-import {User} from "../auth/user.entity";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, Index, OneToMany } from "typeorm";
+import { LotStatus } from "./lot-status.enum";
+import { User } from "../auth/user.entity";
+import { Bid } from "src/bids/bid.entity";
 
 @Entity()
 @Index(['createdAt'])
@@ -17,7 +18,7 @@ export class Lot extends BaseEntity {
   @Column({ nullable: false, default: LotStatus.PENDING })
   status: LotStatus;
 
-  @Column({ nullable: false })
+  @Column({ type: 'timestamp with time zone' })
   createdAt: Date;
 
   @Column('decimal', { nullable: false, precision: 19, scale: 2 })
@@ -40,4 +41,7 @@ export class Lot extends BaseEntity {
 
   @Column()
   userId: number;
+
+  @OneToMany(type => Bid, bid => bid.lot, { eager: true })
+  bids: Bid[];
 }

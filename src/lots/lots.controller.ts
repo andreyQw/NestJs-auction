@@ -6,9 +6,7 @@ import { LotsService } from './lots.service';
 import { CurrentUser } from 'src/auth/current-user.decorator';
 import { Lot } from './lot.entity';
 import { GetLotsFilterDto } from './dto/get-lots-filter.dto';
-import { LotStatusValidationPipe } from './pipes/lot-status-validation.pipe';
-import { LotStatus } from './lot-status.enum';
-import {UpdateLotDto} from "./dto/update-lot.dto";
+import { UpdateLotDto } from "./dto/update-lot.dto";
 
 @Controller('lots')
 @UseGuards(AuthGuard())
@@ -29,8 +27,6 @@ export class LotsController {
   getLotById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Lot> {
-    console.log('getLotById Co');
-
     return this.lotsService.getLotById(id);
   }
 
@@ -51,9 +47,6 @@ export class LotsController {
     @Body() updateLotDto: UpdateLotDto,
     @CurrentUser() user: User,
   ): Promise<Lot> {
-    console.log(status);
-    console.log('user', user);
-
     return this.lotsService.updateLot(id, updateLotDto, user);
   }
 
