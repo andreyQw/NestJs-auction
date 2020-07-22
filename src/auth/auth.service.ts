@@ -5,6 +5,7 @@ import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
 import { SignUpDto } from './dto/sign-up.dto';
+import { SendMailService } from '../mailers/sendMail.service';
 
 @Injectable()
 export class AuthService {
@@ -12,9 +13,12 @@ export class AuthService {
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
     private jwtService: JwtService,
+    private sendMailService: SendMailService,
   ){}
 
   async signUp(signUpDto: SignUpDto): Promise<void> {
+    await this.sendMailService.sendSignUpMail();
+
     return this.userRepository.signUp(signUpDto);
   }
 
@@ -24,7 +28,7 @@ export class AuthService {
 
     if (user && await user.validatePassword(password)) {
       const payload: JwtPayload = { email };
-      const accessToken = await this.jwtService.sign(payload)
+      const accessToken = await this.jwtService.sign(payload);
   
       return { accessToken };
     } else {
