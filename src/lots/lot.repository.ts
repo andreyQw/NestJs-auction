@@ -14,17 +14,12 @@ export class LotRepository extends Repository<Lot> {
     user: User
   ): Promise<Lot[]> {
     const {status, createdAt, lotStartTime, lotEndTime, myLots} = filterDto;
-    console.log('myLots', typeof(myLots));
 
     const query = this.createQueryBuilder('lot');
 
-    if (myLots === true) {
-      query.andWhere('lot.userId = :userId', { userId: user.id })
-    }
+    if (myLots === true) { query.andWhere('lot.userId = :userId', { userId: user.id }) }
 
-    if (status) {
-      query.andWhere('lot.status = :status', { status });
-    }
+    if (status) { query.andWhere('lot.status = :status', { status }) }
 
     return await query.getMany();
   }
@@ -67,13 +62,13 @@ export class LotRepository extends Repository<Lot> {
   }
 
   async updateLot(
-    id: number, updateLotDto: UpdateLotDto, user: User
+    lot: Lot, updateLotDto: UpdateLotDto
   ){
     const {title, status, currentPrice, estimatedPrice, lotStartTime, lotEndTime, description } = updateLotDto;
-    const lot = await this.getOwnLot(id, user);
+    // const lot = await this.getOwnLot(id, user);
 
     if (!lot) {
-      throw new NotFoundException(`Lot with ID "${id}" not found`)
+      throw new NotFoundException(`Lot with ID "${lot.id}" not found`)
     }
 
     lot.title = title;
@@ -89,6 +84,19 @@ export class LotRepository extends Repository<Lot> {
     } catch (error) {
       throw new InternalServerErrorException(`Failed to update a lot. Data: ${updateLotDto}`, error.stack);
     }
+
+    return lot;
+  }
+
+  async updateLotStatus(id: number, lotStatus: LotStatus) {
+    const lot = await this.findOne(id);
+
+    if (!lot) {
+      throw new NotFoundException(`Lot with ID "${id}" not found`)
+    }
+
+    lot.status = lotStatus;
+    await lot.save();
 
     return lot;
   }

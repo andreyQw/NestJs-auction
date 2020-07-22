@@ -23,7 +23,6 @@ export class LotStatusValidationPipe implements PipeTransform {
 
   private isStatusValid(status: any): boolean {
     const idx = this.allowedStatuses.indexOf(status);
-    console.log('idx', idx);
 
     return idx !== -1
   }

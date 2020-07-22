@@ -6,12 +6,13 @@ import { UserRepository } from './user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
+import { SendMailService } from '../mailers/sendMail.service';
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'auctionSecret',
+      secret: process.env.JWT_SECRET,
       signOptions: {
         // expiresIn: 3600, // A numeric value is interpreted as a seconds count. 3600 -> 1h
         expiresIn: '12h'
@@ -23,6 +24,7 @@ import { JwtStrategy } from './jwt.strategy';
   providers: [
     AuthService,
     JwtStrategy,
+    SendMailService,
   ],
   exports: [
     JwtStrategy,

@@ -17,8 +17,7 @@ export class LotsController {
     @Query(ValidationPipe) filterDto: GetLotsFilterDto,
     @CurrentUser() user: User,
   ): Promise<Lot[]> {
-    console.log('filterDto', filterDto);
-    console.log('user', user);
+    console.log('getLots filterDto:', filterDto);
 
     return this.lotsService.getLots(filterDto, user);
   }
@@ -35,8 +34,7 @@ export class LotsController {
     @Body() createLotDto: CreateLotDto,
     @CurrentUser() user: User,
   ): Promise<Lot> {
-    console.log(createLotDto);
-    console.log('user', user);
+    console.log('createLot createLotDto:', createLotDto);
 
     return this.lotsService.createLot(createLotDto, user);
   }

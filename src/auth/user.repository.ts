@@ -8,7 +8,6 @@ import { SignUpDto } from "./dto/sign-up.dto";
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   async signUp(signUpDto: SignUpDto): Promise<void> {
-    console.log(signUpDto);
     const { email, phone, password } = signUpDto;
 
     const user = new User();
