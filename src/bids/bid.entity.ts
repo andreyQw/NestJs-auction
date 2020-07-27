@@ -1,6 +1,13 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
-import { Lot } from "src/lots/lot.entity";
-import { User } from "src/auth/user.entity";
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
+import { Lot } from 'src/lots/lot.entity';
+import { User } from 'src/auth/user.entity';
 
 @Entity()
 export class Bid extends BaseEntity {
@@ -13,9 +20,9 @@ export class Bid extends BaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(type => Lot, lot => lot.bids, { eager: false })
+  @ManyToOne((type) => Lot, (lot) => lot.bids, { eager: false })
   lot: Lot;
 
-  @ManyToOne(type => User, user => user.bids, { eager: false })
+  @ManyToOne((type) => User, (user) => user.bids, { eager: false })
   user: User;
 }

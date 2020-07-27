@@ -1,9 +1,11 @@
-import { Repository, EntityRepository } from "typeorm";
-import { ConflictException, InternalServerErrorException } from "@nestjs/common";
+import { Repository, EntityRepository } from 'typeorm';
+import {
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { User } from "./user.entity";
-import { SignUpDto } from "./dto/sign-up.dto";
-
+import { User } from './user.entity';
+import { SignUpDto } from './dto/sign-up.dto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {

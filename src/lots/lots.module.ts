@@ -13,13 +13,15 @@ import { LotsProcessor } from './lots.processor';
     BullModule.registerQueue({
       name: 'lots',
       redis: {
-        host: process.env.host,
+        host: process.env.HOST,
         port: 6379,
-      }
+        // host: process.env.REDIS_HOST,
+        // port: parseInt(process.env.REDIS_PORT),
+      },
     }),
     AuthModule,
   ],
   controllers: [LotsController],
-  providers: [LotsService, LotsProcessor]
+  providers: [LotsService, LotsProcessor],
 })
 export class LotsModule {}

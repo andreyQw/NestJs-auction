@@ -14,7 +14,7 @@ describe('LotsService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         LotsService,
-        { provide: LotRepository, useFactory: mockLotRepo }
+        { provide: LotRepository, useFactory: mockLotRepo },
       ],
     }).compile();
 

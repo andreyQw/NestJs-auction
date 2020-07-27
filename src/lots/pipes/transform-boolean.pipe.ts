@@ -1,8 +1,8 @@
-import { PipeTransform, ArgumentMetadata, Injectable } from "@nestjs/common";
+import { PipeTransform, ArgumentMetadata, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class TransformBooleanPipe implements PipeTransform {
-  transform(value: any, metadata: ArgumentMetadata){
+  transform(value: any, metadata: ArgumentMetadata) {
     if (value === 'true' || value === true || value === 1 || value === '1') {
       return true;
     } else {

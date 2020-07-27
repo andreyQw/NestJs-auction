@@ -1,6 +1,13 @@
-import { LotStatus } from "../lot-status.enum";
-import { IsString, IsNotEmpty, IsDate, Min, MinDate, IsPositive } from "class-validator";
-import { Type } from "class-transformer";
+import { LotStatus } from '../lot-status.enum';
+import {
+  IsString,
+  IsNotEmpty,
+  IsDate,
+  Min,
+  MinDate,
+  IsPositive,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateLotDto {
   @IsString()

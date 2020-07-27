@@ -13,6 +13,6 @@ import { SendMailService } from '../mailers/sendMail.service';
     SendMailService,
   ],
   controllers: [BidsController],
-  providers: [BidsService, SendMailService]
+  providers: [BidsService, SendMailService],
 })
 export class BidsModule {}

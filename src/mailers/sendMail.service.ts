@@ -1,5 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { MailerService } from "@nestjs-modules/mailer";
+import { Injectable } from '@nestjs/common';
+import { MailerService } from '@nestjs-modules/mailer';
+import { Lot } from '../lots/lot.entity';
+import { User } from '../auth/user.entity';
+import { Bid } from '../bids/bid.entity';
 
 @Injectable()
 export class SendMailService {
@@ -15,32 +18,30 @@ export class SendMailService {
   }
 
   public sendMailToTheLotWinner(
-    email,
-    name,
-    lotTitle,
-    proposedPrice,
+    lot: Lot,
+    winerUser: User,
+    bid: Bid,
     link = '#',
   ): void {
     this.mailerService.sendMail({
-      to: email,
+      to: winerUser.email,
       from: 'mailer.test000111@gmail.com',
-      subject: `You are a winner of bids for ${lotTitle}`,
-      text: `${name}, you are a winner in lot: ${lotTitle}. Link to lot ${link}. Current price: ${proposedPrice}.`,
+      subject: `You are a winner of bids for ${lot.title}`,
+      text: `${winerUser.firstName}, you are a winner in lot: ${lot.title}. Link to lot ${link}. Current price: ${bid.proposedPrice}.`,
     });
   }
 
-  public sendEmailToTheLotOwner(
-    email,
-    name,
-    lotTitle,
-    price,
+  public sendMailToTheLotOwner(
+    lot: Lot,
+    winnerUser: User,
+    bid: Bid,
     link = '#',
   ): void {
     this.mailerService.sendMail({
-      to: email,
+      to: lot.user.email,
       from: process.env.GOOGLE_USER,
-      subject: `The lot ${lotTitle} is closed`,
-      text: `${name}, your lot ${lotTitle} is closed. Current price: ${price}. Link to lot: ${link}`,
+      subject: `The lot ${lot.title} is closed`,
+      text: `${winnerUser.firstName} bought your lot, ${lot.title} is closed. Current price: ${bid.proposedPrice}. Link to lot: ${link}`,
     });
   }
 }
