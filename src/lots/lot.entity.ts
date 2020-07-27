@@ -1,7 +1,15 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, Index, OneToMany } from "typeorm";
-import { LotStatus } from "./lot-status.enum";
-import { User } from "../auth/user.entity";
-import { Bid } from "src/bids/bid.entity";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  Index,
+  OneToMany,
+} from 'typeorm';
+import { LotStatus } from './lot-status.enum';
+import { User } from '../auth/user.entity';
+import { Bid } from 'src/bids/bid.entity';
 
 @Entity()
 @Index(['createdAt'])
@@ -36,12 +44,12 @@ export class Lot extends BaseEntity {
   @Column()
   image: string;
 
-  @ManyToOne(type => User, user => user.lots, { eager: false })
+  @ManyToOne((type) => User, (user) => user.lots, { eager: false })
   user: User;
 
   @Column()
   userId: number;
 
-  @OneToMany(type => Bid, bid => bid.lot, { eager: true })
+  @OneToMany((type) => Bid, (bid) => bid.lot, { eager: true })
   bids: Bid[];
 }

@@ -1,4 +1,10 @@
-import { Controller, Post, Body, UseGuards, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { BidsService } from './bids.service';
 import { CurrentUser } from 'src/auth/current-user.decorator';
@@ -10,7 +16,7 @@ import { Lot } from 'src/lots/lot.entity';
 @Controller('bids')
 @UseGuards(AuthGuard())
 export class BidsController {
-  constructor(private bidsService: BidsService){}
+  constructor(private bidsService: BidsService) {}
 
   @Post()
   createBid(

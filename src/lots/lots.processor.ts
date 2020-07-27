@@ -5,9 +5,7 @@ import { LotStatus } from './lot-status.enum';
 
 @Processor('lots')
 export class LotsProcessor {
-  constructor(
-    private lotRepository: LotRepository
-  ) {}
+  constructor(private lotRepository: LotRepository) {}
 
   @Process('startLot')
   async startLot(job: Job<any>) {
@@ -15,7 +13,10 @@ export class LotsProcessor {
 
     const { lotId } = job.data;
 
-    const lot = await this.lotRepository.updateLotStatus(lotId, LotStatus.IN_PROGRESS);
+    const lot = await this.lotRepository.updateLotStatus(
+      lotId,
+      LotStatus.IN_PROGRESS,
+    );
 
     console.log(`LotJob status AFTER updated ${lot.status}`);
   }

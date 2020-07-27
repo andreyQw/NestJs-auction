@@ -1,15 +1,21 @@
-import { createParamDecorator, ExecutionContext, NotFoundException } from "@nestjs/common";
-import { Lot } from "src/lots/lot.entity";
+import {
+  createParamDecorator,
+  ExecutionContext,
+  NotFoundException,
+} from '@nestjs/common';
+import { Lot } from 'src/lots/lot.entity';
 
-export const CurrentLot = createParamDecorator((data, ctx: ExecutionContext) => {
-  const req = ctx.switchToHttp().getRequest();
-  const lotID = req.body.lotID;
+export const CurrentLot = createParamDecorator(
+  async (data, ctx: ExecutionContext) => {
+    const req = ctx.switchToHttp().getRequest();
+    const lotID = req.body.lotID;
 
-  const lot = Lot.findOne(lotID);
+    const lot = await Lot.findOne(lotID);
 
-  if (!lot) {
-    throw new NotFoundException(`Lot with ID "${lotID}" not found`)
-  }
+    if (!lot) {
+      throw new NotFoundException(`Lot with ID "${lotID}" not found`);
+    }
 
-  return lot;
-});
+    return lot;
+  },
+);

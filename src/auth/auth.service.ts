@@ -14,7 +14,7 @@ export class AuthService {
     private userRepository: UserRepository,
     private jwtService: JwtService,
     private sendMailService: SendMailService,
-  ){}
+  ) {}
 
   async signUp(signUpDto: SignUpDto): Promise<void> {
     await this.sendMailService.sendSignUpMail();
@@ -22,14 +22,16 @@ export class AuthService {
     return this.userRepository.signUp(signUpDto);
   }
 
-  async signIn(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
-    const { email , password } = authCredentialsDto;
+  async signIn(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<{ accessToken: string }> {
+    const { email, password } = authCredentialsDto;
     const user = await this.userRepository.findOne({ email });
 
-    if (user && await user.validatePassword(password)) {
+    if (user && (await user.validatePassword(password))) {
       const payload: JwtPayload = { email };
       const accessToken = await this.jwtService.sign(payload);
-  
+
       return { accessToken };
     } else {
       throw new UnauthorizedException('Invalid credentials');

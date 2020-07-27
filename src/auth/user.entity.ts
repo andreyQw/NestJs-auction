@@ -1,7 +1,15 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, Index , OneToMany } from "typeorm";
-import * as bcrypt from "bcrypt";
-import { Lot } from "../lots/lot.entity";
-import { Bid } from "src/bids/bid.entity";
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  Unique,
+  Index,
+  OneToMany,
+} from 'typeorm';
+import * as bcrypt from 'bcrypt';
+import { Lot } from '../lots/lot.entity';
+import { Bid } from 'src/bids/bid.entity';
 
 @Entity()
 @Unique(['email', 'phone'])
@@ -31,10 +39,10 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   salt: string;
 
-  @OneToMany(type => Lot, lot => lot.user, { eager: true })
+  @OneToMany((type) => Lot, (lot) => lot.user, { eager: true })
   lots: Lot[];
 
-  @OneToMany(type => Bid, bid => bid.user, { eager: true })
+  @OneToMany((type) => Bid, (bid) => bid.user, { eager: true })
   bids: Bid[];
 
   async validatePassword(password: string): Promise<boolean> {

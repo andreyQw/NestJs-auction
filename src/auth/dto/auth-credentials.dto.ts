@@ -1,7 +1,6 @@
-import {IsString, MinLength, IsNotEmpty, IsEmail} from "class-validator";
+import { IsString, MinLength, IsNotEmpty, IsEmail } from 'class-validator';
 
-
-export class AuthCredentialsDto{
+export class AuthCredentialsDto {
   @IsEmail()
   email: string;
 
