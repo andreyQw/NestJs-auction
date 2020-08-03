@@ -12,7 +12,7 @@ export class UserRepository extends Repository<User> {
   async signUp(signUpDto: SignUpDto): Promise<void> {
     const { email, phone, password } = signUpDto;
 
-    const user = new User();
+    const user = this.create();
     user.email = email;
     user.phone = phone;
     user.salt = await bcrypt.genSalt();

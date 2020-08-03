@@ -3,7 +3,7 @@ import {
   ExecutionContext,
   NotFoundException,
 } from '@nestjs/common';
-import { Lot } from 'src/lots/lot.entity';
+import { Lot } from '../lots/lot.entity';
 
 export const CurrentLot = createParamDecorator(
   async (data, ctx: ExecutionContext) => {

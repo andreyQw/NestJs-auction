@@ -6,8 +6,8 @@ import {
   ManyToOne,
   CreateDateColumn,
 } from 'typeorm';
-import { Lot } from 'src/lots/lot.entity';
-import { User } from 'src/auth/user.entity';
+import { Lot } from '../lots/lot.entity';
+import { User } from '../auth/user.entity';
 
 @Entity()
 export class Bid extends BaseEntity {
