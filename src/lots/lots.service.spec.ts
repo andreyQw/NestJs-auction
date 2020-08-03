@@ -15,6 +15,7 @@ describe('LotsService', () => {
       providers: [
         LotsService,
         { provide: LotRepository, useFactory: mockLotRepo },
+        { provide: 'BullQueue_lots', useValue: {} },
       ],
     }).compile();
 

@@ -14,7 +14,7 @@ import { User } from '../auth/user.entity';
 import { Lot } from '../lots/lot.entity';
 
 @Controller('bids')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard('jwt'))
 export class BidsController {
   constructor(private bidsService: BidsService) {}
 

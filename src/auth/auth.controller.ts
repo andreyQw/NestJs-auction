@@ -29,7 +29,7 @@ export class AuthController {
   }
 
   @Post('/test')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   test(@CurrentUser() user: User) {
     return { user };
   }

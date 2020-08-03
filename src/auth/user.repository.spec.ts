@@ -1,16 +1,14 @@
 import { Test } from '@nestjs/testing';
 import { UserRepository } from './user.repository';
 
-const mockCredentialsDto = { email: 'test@gmail.com', password: 'password'};
+const mockCredentialsDto = { email: 'test@gmail.com', password: 'password' };
 
 describe('UserRepository', () => {
   let userRepository;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      providers: [
-        UserRepository,
-      ],
+      providers: [UserRepository],
     }).compile();
 
     userRepository = await module.get<UserRepository>(UserRepository);

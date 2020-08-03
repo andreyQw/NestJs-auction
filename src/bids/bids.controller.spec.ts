@@ -7,6 +7,7 @@ describe('Bids Controller', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [BidsController],
+      providers: [{ provide: 'BidsService', useValue: {} }],
     }).compile();
 
     controller = module.get<BidsController>(BidsController);

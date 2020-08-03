@@ -11,9 +11,9 @@ import { SendMailService } from '../mailers/sendMail.service';
 export class AuthService {
   constructor(
     @InjectRepository(UserRepository)
-    private userRepository: UserRepository,
-    private jwtService: JwtService,
-    private sendMailService: SendMailService,
+    private readonly userRepository: UserRepository,
+    private readonly jwtService: JwtService,
+    private readonly sendMailService: SendMailService,
   ) {}
 
   async signUp(signUpDto: SignUpDto): Promise<void> {

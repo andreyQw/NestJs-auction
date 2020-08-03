@@ -21,9 +21,10 @@ import { GetLotsFilterDto } from './dto/get-lots-filter.dto';
 import { UpdateLotDto } from './dto/update-lot.dto';
 
 @Controller('lots')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard('jwt'))
 export class LotsController {
   constructor(private lotsService: LotsService) {}
+
   @Get()
   getLots(
     @Query(ValidationPipe) filterDto: GetLotsFilterDto,
