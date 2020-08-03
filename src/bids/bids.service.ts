@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { BidRepository } from './bid.reository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Lot } from 'src/lots/lot.entity';
-import { User } from 'src/auth/user.entity';
+import { Lot } from '../lots/lot.entity';
+import { User } from '../auth/user.entity';
 import { Bid } from './bid.entity';
 import { LotStatus } from '../lots/lot-status.enum';
 import { SendMailService } from '../mailers/sendMail.service';

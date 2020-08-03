@@ -3,7 +3,7 @@ import { LotsController } from './lots.controller';
 import { LotsService } from './lots.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LotRepository } from './lot.repository';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 import { BullModule } from '@nestjs/bull';
 import { LotsProcessor } from './lots.processor';
 

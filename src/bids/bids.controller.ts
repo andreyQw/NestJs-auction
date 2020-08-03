@@ -7,11 +7,11 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { BidsService } from './bids.service';
-import { CurrentUser } from 'src/auth/current-user.decorator';
-import { CurrentLot } from 'src/lots/current-lot.decorator';
+import { CurrentUser } from '../auth/current-user.decorator';
+import { CurrentLot } from '../lots/current-lot.decorator';
 import { Bid } from './bid.entity';
-import { User } from 'src/auth/user.entity';
-import { Lot } from 'src/lots/lot.entity';
+import { User } from '../auth/user.entity';
+import { Lot } from '../lots/lot.entity';
 
 @Controller('bids')
 @UseGuards(AuthGuard())

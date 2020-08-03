@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Lot } from '../lots/lot.entity';
-import { Bid } from 'src/bids/bid.entity';
+import { Bid } from '../bids/bid.entity';
 
 @Entity()
 @Unique(['email', 'phone'])

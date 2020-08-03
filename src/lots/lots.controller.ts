@@ -13,9 +13,9 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateLotDto } from './dto/create-lot.dto';
-import { User } from 'src/auth/user.entity';
+import { User } from '../auth/user.entity';
 import { LotsService } from './lots.service';
-import { CurrentUser } from 'src/auth/current-user.decorator';
+import { CurrentUser } from '../auth/current-user.decorator';
 import { Lot } from './lot.entity';
 import { GetLotsFilterDto } from './dto/get-lots-filter.dto';
 import { UpdateLotDto } from './dto/update-lot.dto';

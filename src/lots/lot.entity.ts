@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { LotStatus } from './lot-status.enum';
 import { User } from '../auth/user.entity';
-import { Bid } from 'src/bids/bid.entity';
+import { Bid } from '../bids/bid.entity';
 
 @Entity()
 @Index(['createdAt'])

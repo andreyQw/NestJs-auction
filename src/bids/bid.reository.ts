@@ -1,7 +1,7 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { Bid } from './bid.entity';
-import { Lot } from 'src/lots/lot.entity';
-import { User } from 'src/auth/user.entity';
+import { Lot } from '../lots/lot.entity';
+import { User } from '../auth/user.entity';
 import { BadRequestException } from '@nestjs/common';
 
 @EntityRepository(Bid)

@@ -12,10 +12,8 @@ import { SendMailService } from '../mailers/sendMail.service';
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      // secret: process.env.JWT_SECRET,
       secret: 'auctionSecret',
       signOptions: {
-        // expiresIn: 3600, // A numeric value is interpreted as a seconds count. 3600 -> 1h
         expiresIn: '12h',
       },
     }),
