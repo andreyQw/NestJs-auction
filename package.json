@@ -32,7 +32,7 @@
     "@nestjs/typeorm": "^7.1.0",
     "bcrypt": "^4.0.1",
     "bull": "^3.15.0",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "handlebars": "^4.7.6",
     "nodemailer": "^6.4.10",
