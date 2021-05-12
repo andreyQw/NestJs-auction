@@ -35,7 +35,7 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "handlebars": "^4.7.6",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "pg": "^8.2.1",
